@@ -77,6 +77,10 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
+        sudo rm -f /var/lib/dpkg/lock-frontend
+        sudo rm -f /var/lib/apt/lists/lock
+        sudo dpkg --configure -a
+        sudo apt-get update
         sudo bash -c 'bash <(curl -sL https://build-scripts.immortalwrt.org/init_build_environment.sh)'
         sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
         bzip2 ccache clang cmake cpio curl device-tree-compiler flex gawk gcc-multilib g++-multilib gettext \
